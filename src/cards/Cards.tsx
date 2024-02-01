@@ -1,8 +1,17 @@
-import React from 'react';
+import React from 'react'
+import Card from '../card/Card'
+import { CardsPropsType, CardType } from '../types/types'
+import './Cards.css'
 
-function Cards(props: any) {
-    return <div className="cards content__cards">{props.children}</div>
-    ;
+const Cards = (props: CardsPropsType) => {
+	console.log(props)
+	return (
+		<div className='cards content__cards'>
+			{props.data.map((cardData: CardType) => (
+				<Card key={cardData.name} data={cardData} />
+			))}
+		</div>
+	)
 }
 
-export default Cards;
+export default Cards

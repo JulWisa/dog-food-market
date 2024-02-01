@@ -1,13 +1,15 @@
 import React from 'react'
 import './Card.css'
+import { CardPropsType } from '../types/types'
 
-const Card = () => {
+const Card = (props: CardPropsType) => {
+	const { discount, name, price, picture, wight, available } = props.data
 	return (
 		<article className='card'>
 			<div className='card__sticky card__sticky_type_top-left'>
-				<span className='card__discount'>-15%</span>
+				{!!discount && <span className='card__discount'>{discount}</span>}
 				<span className='tag tag_type_new'>new</span>
-				<span className='tag tag_type_sale'>sale</span>
+				{!!discount && <span className='tag tag_type_sale'>sale</span>}
 			</div>
 			<div className='card__sticky card__sticky_type_top-right'>
 				<button className='card__favorite card__favorite_is-active'>
@@ -32,24 +34,29 @@ const Card = () => {
 				</button>
 			</div>
 			<a className='card__link' href='/product/622c779c77d63f6e70967d1c'>
-				<img
-					src='https://react-learning.ru/image-compressed/1.jpg'
-					alt='Желудки утиные сушено-вяленые'
-					className='card__image'
-					loading='lazy'
-				/>
+				<img src={picture} alt={name} className='card__image' loading='lazy' />
 				<div className='card__desc'>
 					<div className='price-small price-wrap'>
-						<span className='price_old price_left'>4500&nbsp;₽</span>
-						<span className='price_discount price'>3825&nbsp;₽</span>
+						{!!discount && (
+							<span className='price_old price_left card__old-price'>
+								{price}&nbsp;₽
+							</span>
+						)}
+						<span
+							className={`price_discount price card__price ${discount ? 'card__price_type_discount' : ''}`}
+						>
+							{price * (1 - discount * 0.01)}&nbsp;₽
+						</span>
 					</div>
-					<span className='card__wight'>100 г</span>
-					<h3 className='card__name'>Желудки утиные сушено-вяленые</h3>
+					<span className='card__wight'>{wight}</span>
+					<h3 className='card__name'>{name}</h3>
 				</div>
 			</a>
-			<a href='#' className='card__cart card__btn card__btn_type_primary'>
-				В корзину
-			</a>
+			{available && (
+				<a href='/' className='card__cart card__btn card__btn_type_primary'>
+					В корзину
+				</a>
+			)}
 		</article>
 	)
 }

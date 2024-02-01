@@ -4,19 +4,14 @@ import Footer from './footer/Footer'
 import Sort from './sort/Sort'
 import Spinner from './spinner/Spinner'
 import Cards from './cards/Cards'
-import Card from './card/Card'
+import jsonData from '../assets/data.json'
 
 const App = () => {
 	return (
 		<>
-			<Spinner />
 			<Header />
 			<Sort />
-			<Cards>
-				<Card />
-				<Card />
-				<Card />
-			</Cards>
+			<Cards data={jsonData} />
 			<Footer />
 		</>
 	)
