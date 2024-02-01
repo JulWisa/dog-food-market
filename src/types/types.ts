@@ -18,3 +18,8 @@ export type CardType = {
 export type CardPropsType = {
 	data: CardType
 }
+
+export type SearchPropsType = {
+	onSearch: (filteredData: CardType[]) => void
+	data: CardType[]
+}

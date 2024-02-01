@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './header/Header'
 import Footer from './footer/Footer'
 import Sort from './sort/Sort'
-import Spinner from './spinner/Spinner'
 import Cards from './cards/Cards'
 import jsonData from '../assets/data.json'
 
 const App = () => {
+	const [filteredData, setFilteredData] = useState(jsonData)
 	return (
 		<>
-			<Header />
+			<Header data={jsonData} onSearch={setFilteredData} />
 			<Sort />
-			<Cards data={jsonData} />
+			<Cards data={filteredData} />
 			<Footer />
 		</>
 	)

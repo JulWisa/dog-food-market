@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Search.css'
+import { CardType, SearchPropsType } from '../types/types'
 
-function Search() {
+const Search = ({ data, onSearch }: SearchPropsType) => {
+	const [searchStr, setSearchStr] = useState('')
+	const handleSearch = () => {
+		onSearch(
+			data.filter(({ name }: CardType) =>
+				name.toLowerCase().trim().includes(searchStr.toLowerCase().trim())
+			)
+		)
+	}
 	return (
 		<form className='search'>
-			<input type='text' className='search__input' placeholder='Поиск' />
-			<button className='search__btn'>
+			<input
+				type='text'
+				className='search__input'
+				placeholder='Поиск'
+				value={searchStr}
+				onChange={(e) => setSearchStr(e.target.value)}
+			/>
+			<button className='search__btn' onClick={handleSearch}>
 				<svg
 					width='24'
 					height='24'

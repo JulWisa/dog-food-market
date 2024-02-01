@@ -2,15 +2,16 @@ import React from 'react'
 import Logo from '../logo/Logo'
 import Search from '../search/Search'
 import './Header.css'
+import { SearchPropsType } from '../types/types'
 
-const Header = () => {
+const Header = ({ data, onSearch }: SearchPropsType) => {
 	return (
 		<header className='header'>
 			<div className='container header__wrapper'>
 				<span className='undefined logo'>
 					<Logo />
 				</span>
-				<Search />
+				<Search data={data} onSearch={onSearch} />
 				<div className='header__icons-menu'>
 					<a className='header__favorites-link' href='/favorites'>
 						<svg
