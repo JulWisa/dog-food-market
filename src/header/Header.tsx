@@ -2,16 +2,16 @@ import React from 'react'
 import Logo from '../logo/Logo'
 import Search from '../search/Search'
 import './Header.css'
-import { SearchPropsType } from '../types/types'
+import { HeaderPropTypes } from '../types/types'
 
-const Header = ({ data, onSearch }: SearchPropsType) => {
+const Header = ({ data, onSearch }: HeaderPropTypes) => {
 	return (
 		<header className='header'>
 			<div className='container header__wrapper'>
 				<span className='undefined logo'>
 					<Logo />
 				</span>
-				<Search data={data} onSearch={onSearch} />
+				{onSearch && data && <Search data={data} onSearch={onSearch} />}
 				<div className='header__icons-menu'>
 					<a className='header__favorites-link' href='/favorites'>
 						<svg

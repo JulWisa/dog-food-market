@@ -24,6 +24,11 @@ export type SearchPropsType = {
 	data: CardType[]
 }
 
+export type HeaderPropTypes = {
+	onSearch?: (filteredData: CardType[]) => void
+	data?: CardType[]
+}
+
 export type PagingPropsType = {
 	itemsPerPage: number
 	onChange: (index: number) => void

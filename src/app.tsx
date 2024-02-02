@@ -1,42 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import Header from './header/Header'
-import Footer from './footer/Footer'
-import Sort from './sort/Sort'
-import Cards from './cards/Cards'
-import jsonData from '../assets/data.json'
-import Paging from './paging/Paging'
-import { ITEMS_PER_PAGE } from './consts'
+import React from 'react'
 
 const App = () => {
-	const [filteredData, setFilteredData] = useState(jsonData)
-	const [pageData, setPageData] = useState(filteredData)
-	const [currentPage, setCurrentPage] = useState(1)
+	// const [posts, setPosts] = useState<Post[]>([])
+	// const [currentUser, setCurrentUser] = useState<User | null>(null)
+	// useEffect(() => {
+	// 	api
+	// 		.getAllInfo()
+	// 		.then(([postsData, userInfoData]) => {
+	// 			setCurrentUser(userInfoData)
+	// 			setPosts(postsData)
+	// 		})
+	// 		.catch((err) => console.log(err))
+	// }, [])
 
-	useEffect(() => {
-		setCurrentPage(1)
-	}, [filteredData])
-
-	useEffect(() => {
-		const start = (currentPage - 1) * ITEMS_PER_PAGE
-		const end = currentPage * ITEMS_PER_PAGE
-		const newPageData = filteredData.slice(start, end)
-
-		setPageData(newPageData)
-	}, [filteredData, currentPage])
-
-	return (
-		<>
-			<Header data={jsonData} onSearch={setFilteredData} />
-			<Sort />
-			<Cards data={pageData} />
-			<Paging
-				itemsPerPage={ITEMS_PER_PAGE}
-				onChange={setCurrentPage}
-				data={filteredData}
-			/>
-			<Footer />
-		</>
-	)
+	return <></>
 }
 
 export default App

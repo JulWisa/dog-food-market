@@ -4,7 +4,6 @@ import { CardsPropsType, CardType } from '../types/types'
 import './Cards.css'
 
 const Cards = (props: CardsPropsType) => {
-	console.log(props)
 	return (
 		<div className='cards content__cards'>
 			{props.data.map((cardData: CardType) => (

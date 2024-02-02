@@ -1,9 +1,14 @@
 import React from 'react'
 import './Card.css'
 import { CardPropsType } from '../types/types'
+import { Link, useLocation } from 'react-router-dom'
 
-const Card = (props: CardPropsType) => {
-	const { discount, name, price, picture, wight, available } = props.data
+const Card = ({
+	data: { discount, name, price, picture, wight, available },
+}: CardPropsType) => {
+	const location = useLocation()
+
+	console.log('test card loc ', location)
 	return (
 		<article className='card'>
 			<div className='card__sticky card__sticky_type_top-left'>
@@ -33,7 +38,11 @@ const Card = (props: CardPropsType) => {
 					</svg>
 				</button>
 			</div>
-			<a className='card__link' href='/product/622c779c77d63f6e70967d1c'>
+			<Link
+				className='card__link'
+				to='/product/622c779c77d63f6e70967d1c'
+				state={{ prevLocation: location }}
+			>
 				<img src={picture} alt={name} className='card__image' loading='lazy' />
 				<div className='card__desc'>
 					<div className='price-small price-wrap'>
@@ -51,7 +60,7 @@ const Card = (props: CardPropsType) => {
 					<span className='card__wight'>{wight}</span>
 					<h3 className='card__name'>{name}</h3>
 				</div>
-			</a>
+			</Link>
 			{available && (
 				<a href='/' className='card__cart card__btn card__btn_type_primary'>
 					В корзину
