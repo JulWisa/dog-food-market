@@ -12,6 +12,8 @@ import { PATH_NAME } from './consts'
 import NotFoundPage from './pages/not-found-page/NotFoundPage'
 import UserPage from './pages/user-page/UserPage'
 import FavoritesPage from './pages/favorites-page/FavoritesPage'
+import store from './storage/store'
+import { Provider } from 'react-redux'
 
 const routes: RouteObject[] = [
 	{
@@ -36,6 +38,8 @@ const domNode = document.getElementById('root') as HTMLDivElement
 const root = createRoot(domNode)
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
 	</React.StrictMode>
 )

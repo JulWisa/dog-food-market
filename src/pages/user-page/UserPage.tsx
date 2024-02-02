@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './UserPage.css'
 import Header from '../../header/Header'
 import Footer from '../../footer/Footer'
 import BackLink from '../../back-link/BackLink'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../../storage/actions/userActions'
 
 const UserPage = () => {
+	const dispatch = useDispatch()
+	const storage = useSelector((state) => state)
+	console.log(storage)
+
+	useEffect(() => {
+		dispatch(getUser('1'))
+	}, [])
+
 	return (
 		<div>
 			<Header />
