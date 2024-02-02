@@ -11,6 +11,7 @@ import ProductPage from './pages/product-page/ProductPage'
 import { PATH_NAME } from './consts'
 import NotFoundPage from './pages/not-found-page/NotFoundPage'
 import UserPage from './pages/user-page/UserPage'
+import FavoritesPage from './pages/favorites-page/FavoritesPage'
 
 const routes: RouteObject[] = [
 	{
@@ -20,6 +21,7 @@ const routes: RouteObject[] = [
 			{ index: true, element: <ProductListPage /> },
 			{ path: PATH_NAME.PRODUCT, element: <ProductPage /> },
 			{ path: PATH_NAME.USER, element: <UserPage /> },
+			{ path: PATH_NAME.FAVORITES, element: <FavoritesPage /> },
 			{
 				path: PATH_NAME.NOT_FOUND,
 				element: <NotFoundPage />,

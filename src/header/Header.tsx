@@ -15,7 +15,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 				</span>
 				{onSearch && data && <Search data={data} onSearch={onSearch} />}
 				<div className='header__icons-menu'>
-					<a className='header__favorites-link' href='/favorites'>
+					<Link className='header__favorites-link' to={PATH_NAME.FAVORITES}>
 						<svg
 							viewBox='0 0 24 24'
 							fill='none'
@@ -29,7 +29,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 							></path>
 						</svg>
 						<span className='header__icon-bubble'>4</span>
-					</a>
+					</Link>
 					<a className='header__favorites-link' href='/cart'>
 						<svg
 							width='24'
