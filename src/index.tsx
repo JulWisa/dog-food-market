@@ -8,9 +8,9 @@ import './index.css'
 import { createRoot } from 'react-dom/client'
 import ProductListPage from './pages/product-list-page/ProductListPage'
 import ProductPage from './pages/product-page/ProductPage'
-import UserPage from './pages/user-page/UserPage'
 import { PATH_NAME } from './consts'
 import NotFoundPage from './pages/not-found-page/NotFoundPage'
+import UserPage from './pages/user-page/UserPage'
 
 const routes: RouteObject[] = [
 	{

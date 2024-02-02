@@ -3,6 +3,8 @@ import Logo from '../logo/Logo'
 import Search from '../search/Search'
 import './Header.css'
 import { HeaderPropTypes } from '../types/types'
+import { PATH_NAME } from '../consts'
+import { Link } from 'react-router-dom'
 
 const Header = ({ data, onSearch }: HeaderPropTypes) => {
 	return (
@@ -44,7 +46,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 							></path>
 						</svg>
 					</a>
-					<a className='header__icons-menu-item' href='/profile'>
+					<Link className='header__icons-menu-item' to={PATH_NAME.USER}>
 						<svg
 							width='24'
 							height='24'
@@ -60,7 +62,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 							></path>
 						</svg>
 						Иван Иванов
-					</a>
+					</Link>
 					<a className='header__icons-menu-item' href='/'>
 						<svg
 							width='24'
