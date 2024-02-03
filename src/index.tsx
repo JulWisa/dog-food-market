@@ -12,7 +12,7 @@ import { PATH_NAME } from './consts'
 import NotFoundPage from './pages/not-found-page/NotFoundPage'
 import UserPage from './pages/user-page/UserPage'
 import FavoritesPage from './pages/favorites-page/FavoritesPage'
-import store from './storage/store'
+import store from './services/store'
 import { Provider } from 'react-redux'
 
 const routes: RouteObject[] = [

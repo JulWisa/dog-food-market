@@ -10,6 +10,12 @@ export type UserBodyDto = {
 	avatar: string
 }
 
+export type UserEditBodyDto = {
+	about: string
+	name: string
+	avatar: string
+}
+
 type ServerResponse<T> = {
 	created_at?: Date
 	updated_at?: Date
@@ -62,11 +68,15 @@ class Api {
 			headers: this.headers,
 		}).then(this.onResponse)
 	}
+
 	setUserInfo(userData: Pick<User, 'name' | 'about'>) {
 		return fetch(this.getApiUrl('/users/me'), {
 			method: 'PATCH',
 			headers: this.headers,
-			body: JSON.stringify(userData),
+			body: JSON.stringify({
+				name: userData?.name || '',
+				about: userData?.about || '',
+			}),
 		}).then(this.onResponse)
 	}
 
@@ -142,4 +152,5 @@ const api = new Api({
 		authorization: `Bearer ${config.apiToken}`,
 	},
 })
+
 export default api

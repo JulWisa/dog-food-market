@@ -1,3 +1,8 @@
+.user-avatar {
+    height: 34px;
+    border-radius: 50%;
+}
+
 .header {
     width: 100%;
     background-color: #FFE44D;

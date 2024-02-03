@@ -8,7 +8,6 @@ const Card = ({
 }: CardPropsType) => {
 	const location = useLocation()
 
-	console.log('test card loc ', location)
 	return (
 		<article className='card'>
 			<div className='card__sticky card__sticky_type_top-left'>

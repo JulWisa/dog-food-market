@@ -1,19 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './UserPage.css'
 import Header from '../../header/Header'
 import Footer from '../../footer/Footer'
 import BackLink from '../../back-link/BackLink'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUser } from '../../storage/actions/userActions'
+import { useAppDispath, useAppSelector } from '../../services/hooks'
+import { selectUser } from '../../services/user/selectors'
+import { fetchUser, fetchEditedUser } from '../../services/user/userSlice'
+import { UserEditBodyDto } from '../../api'
 
 const UserPage = () => {
-	const dispatch = useDispatch()
-	const storage = useSelector((state) => state)
-	console.log(storage)
+	const dispatch = useAppDispath()
+	const user = useAppSelector(selectUser)
+
+	const [userState, setUserState] = useState<Partial<User>>(user || {})
 
 	useEffect(() => {
-		dispatch(getUser('1'))
+		dispatch(fetchUser())
 	}, [])
+
+	useEffect(() => {
+		setUserState(user as User)
+	}, [user])
+
+	const handleSaveUserBtnClick = (e: any) => {
+		e.preventDefault()
+		dispatch(fetchEditedUser(userState as UserEditBodyDto))
+	}
 
 	return (
 		<div>
@@ -31,6 +43,10 @@ const UserPage = () => {
 									id='name'
 									type='text'
 									placeholder='Введите ваше имя'
+									value={userState?.name}
+									onChange={(e) =>
+										setUserState({ ...userState, name: e.target.value })
+									}
 								/>
 							</label>
 							<label className='form__label'>
@@ -40,6 +56,10 @@ const UserPage = () => {
 									id='about'
 									type='text'
 									placeholder='Описание профессии'
+									value={userState?.about}
+									onChange={(e) =>
+										setUserState({ ...userState, about: e.target.value })
+									}
 								/>
 							</label>
 						</div>
@@ -51,6 +71,9 @@ const UserPage = () => {
 									id='avatar'
 									type='url'
 									placeholder='Введите ссылку на аватарку'
+									value={user?.avatar}
+									readOnly
+									onChange={() => 1}
 								/>
 							</label>
 							<label className='form__label'>
@@ -60,10 +83,16 @@ const UserPage = () => {
 									id='email'
 									type='text'
 									placeholder='email'
+									value={user?.email}
+									readOnly
+									onChange={() => 1}
 								/>
 							</label>
 						</div>
-						<button type='submit' className='form__btn secondary maxContent'>
+						<button
+							className='form__btn secondary maxContent'
+							onClick={handleSaveUserBtnClick}
+						>
 							Сохранить
 						</button>
 					</form>
