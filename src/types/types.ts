@@ -43,3 +43,15 @@ export type TFavoriteButtonProps = {
 	likes?: User[]
 	userId?: string
 }
+
+export type TReviewsProps = {
+	product?: Product
+}
+
+export type TReviewProps = {
+	data: Review
+}
+
+export type TRatingProps = {
+	rating?: number
+}

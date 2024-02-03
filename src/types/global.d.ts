@@ -9,6 +9,7 @@ declare global {
 		updated_at?: string
 		created_at?: string
 	}
+
 	interface Post {
 		image: string
 		likes: string[]
@@ -23,6 +24,7 @@ declare global {
 		updated_at?: string
 		__v?: number
 	}
+
 	interface User {
 		name: string
 		about: string
@@ -32,10 +34,12 @@ declare global {
 		__v?: number
 		group?: string
 	}
+
 	type PostLikeParam = {
 		_id: string
 		likes: string[]
 	}
+
 	interface Product {
 		name: string
 		price: number
@@ -55,5 +59,14 @@ declare global {
 		updated_at?: string
 	}
 
-	interface Review {}
+	interface Review {
+		name?: string
+		city?: string
+		text: string
+		rating?: 5
+		author?: User
+		_id: string
+		created_at?: string
+		updated_at?: string
+	}
 }
