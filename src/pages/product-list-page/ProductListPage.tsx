@@ -29,7 +29,7 @@ const ProductListPage = () => {
 		<>
 			<Header data={jsonData} onSearch={setFilteredData} />
 			<Sort />
-			<Cards data={pageData} />
+			<Cards />
 			<Paging
 				itemsPerPage={ITEMS_PER_PAGE}
 				onChange={setCurrentPage}

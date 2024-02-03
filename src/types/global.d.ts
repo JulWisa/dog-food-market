@@ -36,4 +36,24 @@ declare global {
 		_id: string
 		likes: string[]
 	}
+	interface Product {
+		name: string
+		price: number
+		description: string
+		discount?: number
+		stock?: number
+		available?: boolean
+		pictures?: string
+		likes?: string[]
+		reviews?: Review[]
+		tags?: string[]
+		isPublished?: boolean
+		_id?: string
+		author?: User
+		wight?: string
+		created_at?: string
+		updated_at?: string
+	}
+
+	interface Review {}
 }

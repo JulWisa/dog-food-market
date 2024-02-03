@@ -4,7 +4,7 @@ import { CardPropsType } from '../types/types'
 import { Link, useLocation } from 'react-router-dom'
 
 const Card = ({
-	data: { discount, name, price, picture, wight, available },
+	data: { discount = 0, name, price, pictures, wight, available },
 }: CardPropsType) => {
 	const location = useLocation()
 
@@ -42,7 +42,7 @@ const Card = ({
 				to='/product/622c779c77d63f6e70967d1c'
 				state={{ prevLocation: location }}
 			>
-				<img src={picture} alt={name} className='card__image' loading='lazy' />
+				<img src={pictures} alt={name} className='card__image' loading='lazy' />
 				<div className='card__desc'>
 					<div className='price-small price-wrap'>
 						{!!discount && (
@@ -53,7 +53,7 @@ const Card = ({
 						<span
 							className={`price_discount price card__price ${discount ? 'card__price_type_discount' : ''}`}
 						>
-							{price * (1 - discount * 0.01)}&nbsp;₽
+							{Math.floor(price * (1 - discount * 0.01))}&nbsp;₽
 						</span>
 					</div>
 					<span className='card__wight'>{wight}</span>

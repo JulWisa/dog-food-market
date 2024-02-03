@@ -4,10 +4,16 @@ type TConfigApi = {
 	baseUrl: string
 	headers: HeadersInit
 }
+
 export type UserBodyDto = {
 	about: string
 	name: string
 	avatar: string
+}
+
+export type TProductsResponseDto = {
+	total: number
+	products: Product[]
 }
 
 export type UserEditBodyDto = {

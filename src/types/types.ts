@@ -16,7 +16,7 @@ export type CardType = {
 }
 
 export type CardPropsType = {
-	data: CardType
+	data: Product
 }
 
 export type SearchPropsType = {
