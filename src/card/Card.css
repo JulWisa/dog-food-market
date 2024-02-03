@@ -87,33 +87,13 @@
     left: 0;
 }
 
+.card__sticky_type_top-left span {
+    margin-right: 4px;
+}
+
 .card__sticky_type_top-right {
     top: 0;
     right: 0;
-}
-
-.card__favorite {
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    display: flex;
-}
-
-.card__favorite svg {
-    fill: #FFFFFF;
-}
-
-.card__favorite svg path:first-child {
-    fill: #7b8e98;
-}
-
-.card__favorite_is-active svg {
-    fill: #F44336;
-}
-
-.card__favorite_is-active svg path:first-child {
-    fill: #F44336;
 }
 
 .card__cart {

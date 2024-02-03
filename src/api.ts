@@ -16,11 +16,17 @@ export type TProductsResponseDto = {
 	products: Product[]
 }
 
+export type TProductResponseDto = Product
+
 export type UserEditBodyDto = {
 	about: string
 	name: string
 	avatar: string
 }
+
+export type ProductBodyDto = string
+
+export type LikedProductBodyDto = { productId: string, like: boolean }
 
 type ServerResponse<T> = {
 	created_at?: Date
@@ -55,7 +61,23 @@ class Api {
 
 	// Products
 	getProductsList() {
-		return fetch(this.getApiUrl('/products'), {
+		return fetch(this.getApiUrl('/products?limit=15'), {
+			headers: this.headers,
+		}).then(this.onResponse)
+	}
+
+	// Product
+	getProduct(productId: ProductBodyDto) {
+		return fetch(this.getApiUrl(`/products/${productId}`), {
+			headers: this.headers,
+			method: 'GET',
+		}).then(this.onResponse)
+	}
+
+	changeLikeProductStatus(productId: string, like: boolean) {
+		return fetch(this.getApiUrl(`/products/likes/${productId}`), {
+			method: like ? 'DELETE' : 'PUT',
+
 			headers: this.headers,
 		}).then(this.onResponse)
 	}

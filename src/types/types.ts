@@ -1,6 +1,7 @@
 export type TCardsProps = {
 	data: Product[]
 	loading: boolean
+	user?: User | null
 }
 
 export type CardType = {
@@ -18,6 +19,7 @@ export type CardType = {
 
 export type CardPropsType = {
 	data: Product
+	user?: User | null
 }
 
 export type SearchPropsType = {
@@ -34,4 +36,10 @@ export type PagingPropsType = {
 	itemsPerPage: number
 	onChange: (index: number) => void
 	data: any[]
+}
+
+export type TFavoriteButtonProps = {
+	productId?: string
+	likes?: User[]
+	userId?: string
 }

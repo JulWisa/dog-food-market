@@ -44,7 +44,7 @@ declare global {
 		stock?: number
 		available?: boolean
 		pictures?: string
-		likes?: string[]
+		likes?: User[]
 		reviews?: Review[]
 		tags?: string[]
 		isPublished?: boolean

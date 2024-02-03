@@ -37,7 +37,6 @@ export const fetchProducts = createAppAsyncThunk<TProductsResponseDto>(
 	async function (_, { fulfillWithValue, rejectWithValue, extra: api }) {
 		try {
 			const data = await api.getProductsList()
-			console.log('test redux data', data)
 			return fulfillWithValue(data)
 		} catch (err) {
 			return rejectWithValue(err)

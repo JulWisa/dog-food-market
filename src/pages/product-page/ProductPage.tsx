@@ -1,19 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../header/Header'
 import Footer from '../../footer/Footer'
 import './ProductPage.css'
 import BackLink from '../../back-link/BackLink'
+import { useAppDispath, useAppSelector } from '../../services/hooks'
+import { TProductResponseDto } from '../../api'
+import {
+	selectProduct,
+	// selectProductLoading,
+} from '../../services/product/selectors'
+import { fetchProduct } from '../../services/product/productSlice'
+import { useParams } from 'react-router-dom'
+import { getPriceWIthDiscount } from '../../utils'
+import Spinner from '../../spinner/Spinner'
 
 const ProductPage = () => {
+	const dispatch = useAppDispath()
+	const data: TProductResponseDto | null = useAppSelector(selectProduct)
+	const { id } = useParams()
+	// const loading = useAppSelector(selectProductLoading)
+
+	useEffect(() => {
+		dispatch(fetchProduct(id as string))
+	}, [])
+
+	useEffect(() => {
+		console.log(data)
+	}, [data])
+
+	if (!data) return <Spinner />
+
+	const {
+		price,
+		name,
+		_id,
+		discount,
+		pictures,
+		description,
+		available,
+		wight,
+		created_at,
+		isPublished,
+		stock,
+	} = data
+
 	return (
 		<>
 			<Header />
 			<main className='main' style={{ backgroundColor: '#FFFFFF' }}>
 				<div className='content container'>
 					<BackLink />
-					<h1 className='header-title'>Желудки утиные сушено-вяленые</h1>
+					<h1 className='header-title'>{name}</h1>
 					<p className='acticul'>
-						Артикул: <b>2388907</b>
+						Артикул: <b>{_id}</b>
 					</p>
 					<div>
 						<span>
@@ -80,15 +119,15 @@ const ProductPage = () => {
 					</div>
 					<div className='product'>
 						<div className='product__img-wrapper'>
-							<img
-								src='https://react-learning.ru/image-compressed/1.jpg'
-								alt='Изображение Желудки утиные сушено-вяленые'
-							/>
+							<img src={pictures} alt={name} />
 						</div>
 						<div className='product__desc'>
 							<div className='price-big price-wrap'>
-								<span className='price_old price_left'>4500&nbsp;₽</span>
-								<span className='price_discount price'>3825&nbsp;₽</span>
+								<span className='price_old price_left'>{price}&nbsp;₽</span>
+								<span className='price_discount price'>
+									{discount ? getPriceWIthDiscount(price, discount) : price}
+									&nbsp;₽
+								</span>
 							</div>
 							<div className='product__btn-wrap'>
 								<div className='button-count'>
@@ -160,30 +199,14 @@ const ProductPage = () => {
 					</div>
 					<div className='product__box'>
 						<h2 className='product__title'>Описание</h2>
-						<p className='product__subtitle'>Описание demo</p>
+						<p className='product__subtitle'>{description}</p>
 						<h2 className='product__title'>Характеристики</h2>
 						<div className='product__grid'>
 							<div className='product__naming'>Вес</div>
-							<div className='product__description'>1 шт 120-200 грамм</div>
+							<div className='product__description'>{wight}</div>
 							<div className='product__naming'>Цена</div>
-							<div className='product__description'>490 ₽ за 100 грамм</div>
-							<div className='product__naming'>Польза</div>
 							<div className='product__description'>
-								<p>
-									Большое содержание аминокислот и микроэлементов оказывает
-									положительное воздействие на общий обмен веществ собаки.
-								</p>
-								<p>Способствуют укреплению десен и жевательных мышц.</p>
-								<p>
-									Развивают зубочелюстной аппарат, отвлекают собаку во время
-									смены зубов.
-								</p>
-								<p>
-									Имеет цельную волокнистую структуру, при разжевывание
-									получается эффект зубной щетки, лучше всего очищает клыки
-									собак.
-								</p>
-								<p>Следует учесть высокую калорийность продукта.</p>
+								{price}₽ за {wight}
 							</div>
 						</div>
 					</div>

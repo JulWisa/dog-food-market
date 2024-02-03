@@ -14,15 +14,20 @@ import {
 } from '../../services/products/selectors'
 import { fetchProducts } from '../../services/products/productsSlice'
 import { useParams } from 'react-router-dom'
+import { selectUser } from '../../services/user/selectors'
+import { fetchUser } from '../../services/user/userSlice'
 
 const ProductListPage = () => {
 	const dispatch = useAppDispath()
+	const user = useAppSelector(selectUser)
 	const data: TProductsResponseDto | null = useAppSelector(selectProducts)
 	const loading = useAppSelector(selectProductsLoading)
+
 	const { query } = useParams()
 
 	useEffect(() => {
 		dispatch(fetchProducts())
+		dispatch(fetchUser())
 	}, [])
 
 	useEffect(() => {
@@ -55,7 +60,7 @@ const ProductListPage = () => {
 		<>
 			<Header data={data?.products || []} onSearch={handleSearch} />
 			<Sort />
-			<Cards data={data?.products || []} loading={loading} />
+			<Cards data={data?.products || []} loading={loading} user={user} />
 			<Paging
 				itemsPerPage={ITEMS_PER_PAGE}
 				onChange={setCurrentPage}
