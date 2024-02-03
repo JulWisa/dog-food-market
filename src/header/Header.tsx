@@ -23,7 +23,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 				<span className='undefined logo'>
 					<Logo />
 				</span>
-				{onSearch && data && <Search data={data} onSearch={onSearch} />}
+				{onSearch && data && <Search />}
 				<div className='header__icons-menu'>
 					<Link className='header__favorites-link' to={PATH_NAME.FAVORITES}>
 						<svg

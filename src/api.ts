@@ -60,8 +60,8 @@ class Api {
 	}
 
 	// Products
-	getProductsList() {
-		return fetch(this.getApiUrl('/products?limit=15'), {
+	getProductsList(searchParams: string) {
+		return fetch(this.getApiUrl(`/products?${searchParams}`), {
 			headers: this.headers,
 		}).then(this.onResponse)
 	}
@@ -96,7 +96,7 @@ class Api {
 	}
 	getAllInfo() {
 		return Promise.all([
-			this.getProductsList(),
+			this.getProductsList(''),
 			this.getUserInfo(),
 			this.getReviews(),
 		])

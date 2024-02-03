@@ -13,7 +13,7 @@ import {
 	selectProductsLoading,
 } from '../../services/products/selectors'
 import { fetchProducts } from '../../services/products/productsSlice'
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { selectUser } from '../../services/user/selectors'
 import { fetchUser } from '../../services/user/userSlice'
 
@@ -23,12 +23,16 @@ const ProductListPage = () => {
 	const data: TProductsResponseDto | null = useAppSelector(selectProducts)
 	const loading = useAppSelector(selectProductsLoading)
 
-	const { query } = useParams()
+	const [searchParams] = useSearchParams()
 
 	useEffect(() => {
-		dispatch(fetchProducts())
+		dispatch(fetchProducts(searchParams.toString()))
 		dispatch(fetchUser())
 	}, [])
+
+	useEffect(() => {
+		dispatch(fetchProducts(searchParams.toString()))
+	}, [searchParams])
 
 	useEffect(() => {
 		console.log(data)

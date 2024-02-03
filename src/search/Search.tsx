@@ -1,11 +1,21 @@
-import React, { useState } from 'react'
+import React, { BaseSyntheticEvent, useState } from 'react'
 import './Search.css'
-import { CardType, SearchPropsType } from '../types/types'
+import { useSearchParams } from 'react-router-dom'
 
-const Search = ({ data, onSearch }: SearchPropsType) => {
-	const [searchStr, setSearchStr] = useState('')
-	const handleSearch = () => {
-		onSearch(searchStr)
+const Search = () => {
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [query, setQuery] = useState('')
+	const handleSearch = (event: BaseSyntheticEvent) => {
+		event.preventDefault()
+		searchParams.set('query', query)
+		setSearchParams(searchParams)
+	}
+	const handleClear = (event: BaseSyntheticEvent) => {
+		event.preventDefault()
+		event.stopPropagation()
+		searchParams.set('query', '')
+		setQuery('')
+		setSearchParams(searchParams)
 	}
 	return (
 		<form className='search'>
@@ -13,8 +23,8 @@ const Search = ({ data, onSearch }: SearchPropsType) => {
 				type='text'
 				className='search__input'
 				placeholder='Поиск'
-				value={searchStr}
-				onChange={(e) => setSearchStr(e.target.value)}
+				value={query}
+				onChange={(e) => setQuery(e.target.value)}
 			/>
 			<button className='search__btn' onClick={handleSearch}>
 				<svg
@@ -22,6 +32,7 @@ const Search = ({ data, onSearch }: SearchPropsType) => {
 					height='24'
 					viewBox='0 0 24 24'
 					xmlns='http://www.w3.org/2000/svg'
+					onClick={handleSearch}
 				>
 					<path
 						fillRule='evenodd'
@@ -34,6 +45,7 @@ const Search = ({ data, onSearch }: SearchPropsType) => {
 					height='24'
 					viewBox='0 0 24 24'
 					xmlns='http://www.w3.org/2000/svg'
+					onClick={handleClear}
 				>
 					<path
 						fillRule='evenodd'
