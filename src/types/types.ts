@@ -1,5 +1,6 @@
-export type CardsPropsType = {
-	data: CardType[]
+export type TCardsProps = {
+	data: Product[]
+	loading: boolean
 }
 
 export type CardType = {
@@ -20,13 +21,13 @@ export type CardPropsType = {
 }
 
 export type SearchPropsType = {
-	onSearch: (filteredData: CardType[]) => void
-	data: CardType[]
+	onSearch: (searchString: string) => void
+	data: Product[]
 }
 
 export type HeaderPropTypes = {
-	onSearch?: (filteredData: CardType[]) => void
-	data?: CardType[]
+	onSearch?: (searchString: string) => void
+	data?: Product[]
 }
 
 export type PagingPropsType = {

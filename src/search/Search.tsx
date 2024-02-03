@@ -5,11 +5,7 @@ import { CardType, SearchPropsType } from '../types/types'
 const Search = ({ data, onSearch }: SearchPropsType) => {
 	const [searchStr, setSearchStr] = useState('')
 	const handleSearch = () => {
-		onSearch(
-			data.filter(({ name }: CardType) =>
-				name.toLowerCase().trim().includes(searchStr.toLowerCase().trim())
-			)
-		)
+		onSearch(searchStr)
 	}
 	return (
 		<form className='search'>

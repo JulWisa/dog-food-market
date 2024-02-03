@@ -4,7 +4,7 @@ import { CardPropsType } from '../types/types'
 import { Link, useLocation } from 'react-router-dom'
 
 const Card = ({
-	data: { discount = 0, name, price, pictures, wight, available },
+	data: { discount = 0, name, price, pictures, wight, available, _id },
 }: CardPropsType) => {
 	const location = useLocation()
 
@@ -39,7 +39,7 @@ const Card = ({
 			</div>
 			<Link
 				className='card__link'
-				to='/product/622c779c77d63f6e70967d1c'
+				to={`/product/${_id}`}
 				state={{ prevLocation: location }}
 			>
 				<img src={pictures} alt={name} className='card__image' loading='lazy' />

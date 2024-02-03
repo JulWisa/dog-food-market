@@ -6,8 +6,34 @@ import Sort from '../../sort/Sort'
 import Paging from '../../paging/Paging'
 import Cards from '../../cards/Cards'
 import Footer from '../../footer/Footer'
+import { useAppDispath, useAppSelector } from '../../services/hooks'
+import { TProductsResponseDto } from '../../api'
+import {
+	selectProducts,
+	selectProductsLoading,
+} from '../../services/products/selectors'
+import { fetchProducts } from '../../services/products/productsSlice'
+import { useParams } from 'react-router-dom'
 
 const ProductListPage = () => {
+	const dispatch = useAppDispath()
+	const data: TProductsResponseDto | null = useAppSelector(selectProducts)
+	const loading = useAppSelector(selectProductsLoading)
+	const { query } = useParams()
+
+	useEffect(() => {
+		dispatch(fetchProducts())
+	}, [])
+
+	useEffect(() => {
+		console.log(data)
+	}, [data])
+
+	const handleSearch = (prps: any) => {
+		console.log(prps)
+		// dispatch(fetchProducts()).then(console.log)
+	}
+
 	// filter + pagination
 	const [filteredData, setFilteredData] = useState(jsonData)
 	const [pageData, setPageData] = useState(filteredData)
@@ -27,9 +53,9 @@ const ProductListPage = () => {
 
 	return (
 		<>
-			<Header data={jsonData} onSearch={setFilteredData} />
+			<Header data={data?.products || []} onSearch={handleSearch} />
 			<Sort />
-			<Cards />
+			<Cards data={data?.products || []} loading={loading} />
 			<Paging
 				itemsPerPage={ITEMS_PER_PAGE}
 				onChange={setCurrentPage}

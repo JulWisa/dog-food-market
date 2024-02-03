@@ -46,16 +46,27 @@ class Api {
 		return `${this.baseUrl}${path}`
 	}
 
+	// User
 	getUserInfo() {
 		return fetch(this.getApiUrl('/users/me'), {
 			headers: this.headers,
 		}).then(this.onResponse)
 	}
+
+	// Products
 	getProductsList() {
 		return fetch(this.getApiUrl('/products'), {
 			headers: this.headers,
 		}).then(this.onResponse)
 	}
+
+	deleteProductById(productId: string) {
+		return fetch(this.getApiUrl(`/products/${productId}`), {
+			headers: this.headers,
+			method: 'DELETE',
+		}).then(this.onResponse)
+	}
+
 	getReviews() {
 		return fetch(this.getApiUrl('/products/review/'), {
 			headers: this.headers,
@@ -106,6 +117,7 @@ class Api {
 	getInfoPost(postID: string) {
 		return Promise.all([this.getPostById(postID), this.getPostComments(postID)])
 	}
+
 	deletePostById(postID: string) {
 		return fetch(this.getApiUrl(`/posts/${postID}`), {
 			headers: this.headers,

@@ -1,27 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Card from '../card/Card'
 import './Cards.css'
-import { useAppDispath, useAppSelector } from '../services/hooks'
-import { selectProducts } from '../services/products/selectors'
-import { fetchProducts } from '../services/products/productsSlice'
-import { TProductsResponseDto } from '../api'
+import { TCardsProps } from '../types/types'
 
-const Cards = () => {
-	const dispatch = useAppDispath()
-	const data: TProductsResponseDto | null = useAppSelector(selectProducts)
-
-	useEffect(() => {
-		dispatch(fetchProducts())
-	}, [])
-
-	useEffect(() => {
-		console.log(data)
-	}, [data])
-
+const Cards = ({ data }: TCardsProps) => {
 	return (
 		<div className='cards content__cards'>
-			{data?.products?.map((cardData) => (
-				<Card key={cardData.name} data={cardData} />
+			{/*{loading && <Spinner />}*/}
+			{data.map((cardData) => (
+				<Card key={cardData._id} data={cardData} />
 			))}
 		</div>
 	)
