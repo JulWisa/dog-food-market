@@ -1,15 +1,25 @@
-import React, { BaseSyntheticEvent, useState } from 'react'
+import React, { BaseSyntheticEvent, useEffect, useState } from 'react'
 import './Search.css'
 import { useSearchParams } from 'react-router-dom'
+import { useDebounce } from '../hooks/useDebounce'
 
 const Search = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [query, setQuery] = useState('')
-	const handleSearch = (event: BaseSyntheticEvent) => {
-		event.preventDefault()
-		searchParams.set('query', query)
-		setSearchParams(searchParams)
-	}
+	const [query, setQuery] = useState(() => {
+		return searchParams.get('query') ?? ''
+	})
+
+	const optimizedValue = useDebounce({ value: { query }, delay: 1000 })
+
+	useEffect(() => {
+		setSearchParams(optimizedValue)
+	}, [optimizedValue, setSearchParams])
+
+	useEffect(() => {
+		if (query) searchParams.set('query', query)
+		else searchParams.delete('query')
+	}, [query, searchParams, setSearchParams])
+
 	const handleClear = (event: BaseSyntheticEvent) => {
 		event.preventDefault()
 		event.stopPropagation()
@@ -17,6 +27,7 @@ const Search = () => {
 		setQuery('')
 		setSearchParams(searchParams)
 	}
+
 	return (
 		<form className='search'>
 			<input
@@ -26,20 +37,7 @@ const Search = () => {
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
 			/>
-			<button className='search__btn' onClick={handleSearch}>
-				<svg
-					width='24'
-					height='24'
-					viewBox='0 0 24 24'
-					xmlns='http://www.w3.org/2000/svg'
-					onClick={handleSearch}
-				>
-					<path
-						fillRule='evenodd'
-						clipRule='evenodd'
-						d='M19.0568 20C19.6091 20 20 19.5792 20 19.0405C20 18.788 19.915 18.5523 19.7281 18.3672L15.726 14.3945C16.5672 13.3004 17.0685 11.9453 17.0685 10.4724C17.0685 6.91215 14.1285 4 10.5343 4C6.93999 4 4 6.91215 4 10.4724C4 14.0326 6.93999 16.9448 10.5343 16.9448C11.9533 16.9448 13.2618 16.4903 14.3324 15.7328L18.3601 19.7223C18.547 19.9074 18.7934 20 19.0568 20ZM10.5343 15.5476C7.73022 15.5476 5.41052 13.2499 5.41052 10.4724C5.41052 7.6949 7.73022 5.39716 10.5343 5.39716C13.3383 5.39716 15.658 7.6949 15.658 10.4724C15.658 13.2499 13.3383 15.5476 10.5343 15.5476Z'
-					></path>
-				</svg>
+			<button className='search__btn'>
 				<svg
 					width='24'
 					height='24'
