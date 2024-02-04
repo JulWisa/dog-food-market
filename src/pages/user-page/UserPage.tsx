@@ -5,7 +5,7 @@ import Footer from '../../footer/Footer'
 import BackLink from '../../back-link/BackLink'
 import { useAppDispath, useAppSelector } from '../../services/hooks'
 import { selectUser } from '../../services/user/selectors'
-import { fetchUser, fetchEditedUser } from '../../services/user/userSlice'
+import { fetchEditedUser } from '../../services/user/userSlice'
 import { UserEditBodyDto } from '../../api'
 
 const UserPage = () => {
@@ -13,10 +13,6 @@ const UserPage = () => {
 	const user = useAppSelector(selectUser)
 
 	const [userState, setUserState] = useState<Partial<User>>(user || {})
-
-	useEffect(() => {
-		dispatch(fetchUser())
-	}, [])
 
 	useEffect(() => {
 		setUserState(user as User)

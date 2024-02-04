@@ -15,7 +15,6 @@ import {
 import { fetchProducts } from '../../services/products/productsSlice'
 import { useSearchParams } from 'react-router-dom'
 import { selectUser } from '../../services/user/selectors'
-import { fetchUser } from '../../services/user/userSlice'
 
 const ProductListPage = () => {
 	const dispatch = useAppDispath()
@@ -27,7 +26,6 @@ const ProductListPage = () => {
 
 	useEffect(() => {
 		dispatch(fetchProducts(searchParams.toString()))
-		dispatch(fetchUser())
 	}, [])
 
 	useEffect(() => {

@@ -15,9 +15,10 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 	const user = useAppSelector(selectUser)
 	const cartProducts = useAppSelector(selectCartElements)
 
+	// TODO вынести в app
 	useEffect(() => {
-		dispatch(fetchUser())
-	}, [])
+		if (!user) dispatch(fetchUser())
+	}, [user])
 
 	return (
 		<header className='header'>
