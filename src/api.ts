@@ -26,7 +26,12 @@ export type UserEditBodyDto = {
 
 export type ProductBodyDto = string
 
-export type LikedProductBodyDto = { productId: string, like: boolean }
+export type LikedProductBodyDto = { productId: string; like: boolean }
+
+export type ReviewedProductBodyDto = {
+	productId: string
+	reviewData: Pick<Review, 'text' | 'rating'>
+}
 
 type ServerResponse<T> = {
 	created_at?: Date
@@ -79,6 +84,14 @@ class Api {
 			method: like ? 'DELETE' : 'PUT',
 
 			headers: this.headers,
+		}).then(this.onResponse)
+	}
+
+	addReview(productId: string, reviewData: Pick<Review, 'text' | 'rating'>) {
+		return fetch(this.getApiUrl(`/products/review/${productId}`), {
+			headers: this.headers,
+			method: 'POST',
+			body: JSON.stringify(reviewData),
 		}).then(this.onResponse)
 	}
 

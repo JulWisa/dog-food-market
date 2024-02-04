@@ -7,9 +7,9 @@ const Reviews = ({ product }: TReviewsProps) => {
 	console.log(product, product?.reviews)
 	return (
 		<div className='product__reviews'>
-			{/*{product?.reviews?.map((review) => (*/}
-			{/*	<Review key={review._id} data={review} />*/}
-			{/*))}*/}
+			{product?.reviews?.map((review) => (
+				<Review key={review._id} data={review} />
+			))}
 			<ReviewForm product={product} />
 		</div>
 	)

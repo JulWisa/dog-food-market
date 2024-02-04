@@ -63,7 +63,7 @@ declare global {
 		name?: string
 		city?: string
 		text: string
-		rating?: 5
+		rating?: number
 		author?: User
 		_id: string
 		created_at?: string

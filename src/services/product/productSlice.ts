@@ -3,6 +3,7 @@ import { createAppAsyncThunk } from '../hooks'
 import {
 	LikedProductBodyDto,
 	ProductBodyDto,
+	ReviewedProductBodyDto,
 	TProductResponseDto,
 } from '../../api'
 
@@ -56,6 +57,24 @@ export const fetchLikedProduct = createAppAsyncThunk<
 	}
 )
 
+export const fetchReviewedProduct = createAppAsyncThunk<
+	TProductResponseDto,
+	ReviewedProductBodyDto
+>(
+	`${sliceName}/fetchReviewedProduct`,
+	async function (
+		{ productId, reviewData },
+		{ fulfillWithValue, rejectWithValue, extra: api }
+	) {
+		try {
+			const data = await api.addReview(productId, reviewData)
+			return fulfillWithValue(data)
+		} catch (err) {
+			return rejectWithValue(err)
+		}
+	}
+)
+
 const productSlice = createSlice({
 	name: sliceName,
 	initialState,
@@ -83,6 +102,18 @@ const productSlice = createSlice({
 				state.error = null
 			})
 			.addCase(fetchLikedProduct.rejected, (state, action) => {
+				state.error = action.payload
+				state.loading = false
+			})
+			.addCase(fetchReviewedProduct.fulfilled, (state, action) => {
+				state.data = action.payload
+				state.loading = false
+			})
+			.addCase(fetchReviewedProduct.pending, (state) => {
+				state.loading = true
+				state.error = null
+			})
+			.addCase(fetchReviewedProduct.rejected, (state, action) => {
 				state.error = action.payload
 				state.loading = false
 			})
