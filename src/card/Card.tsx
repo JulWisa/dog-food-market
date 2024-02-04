@@ -17,6 +17,7 @@ const Card = ({ data, user }: CardPropsType) => {
 		_id,
 		tags,
 		likes,
+		stock,
 	} = data
 	const location = useLocation()
 
@@ -59,7 +60,7 @@ const Card = ({ data, user }: CardPropsType) => {
 					<h3 className='card__name'>{name}</h3>
 				</div>
 			</Link>
-			{available && <CartItemControl product={data} />}
+			{available && stock && <CartItemControl product={data} />}
 		</article>
 	)
 }

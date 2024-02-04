@@ -19,7 +19,7 @@ const CartItemControl = ({ product }: TCartItemControl) => {
 		event.preventDefault()
 		dispatch(add(product))
 	}
-	return (
+	return count > 0 ? (
 		<div className='button-count'>
 			<button
 				className='button-count__minus'
@@ -37,6 +37,14 @@ const CartItemControl = ({ product }: TCartItemControl) => {
 				+
 			</button>
 		</div>
+	) : (
+		<a
+			href='/'
+			className='card__cart card__btn card__btn_type_primary'
+			onClick={handleAddClick}
+		>
+			В корзину
+		</a>
 	)
 }
 

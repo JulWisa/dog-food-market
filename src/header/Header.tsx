@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom'
 import { useAppDispath, useAppSelector } from '../services/hooks'
 import { selectUser } from '../services/user/selectors'
 import { fetchUser } from '../services/user/userSlice'
+import { selectCartElements } from '../services/cart/selectors'
 
 const Header = ({ data, onSearch }: HeaderPropTypes) => {
 	const dispatch = useAppDispath()
 	const user = useAppSelector(selectUser)
+	const cartProducts = useAppSelector(selectCartElements)
 
 	useEffect(() => {
 		dispatch(fetchUser())
@@ -55,9 +57,14 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 								fill='#1A1A1A'
 							></path>
 						</svg>
+						<span className='header__icon-bubble'>{cartProducts.length}</span>
 					</Link>
 					<Link className='header__icons-menu-item' to={PATH_NAME.USER}>
-						<img src={user?.avatar} alt={user?.name || 'user avatar'} className="user-avatar" />
+						<img
+							src={user?.avatar}
+							alt={user?.name || 'user avatar'}
+							className='user-avatar'
+						/>
 						{user?.name}
 					</Link>
 					<a className='header__icons-menu-item' href='/'>
