@@ -5,21 +5,18 @@ import './ProductPage.css'
 import BackLink from '../../back-link/BackLink'
 import { useAppDispath, useAppSelector } from '../../services/hooks'
 import { TProductResponseDto } from '../../api'
-import {
-	selectProduct,
-	// selectProductLoading,
-} from '../../services/product/selectors'
+import { selectProduct } from '../../services/product/selectors'
 import { fetchProduct } from '../../services/product/productSlice'
 import { useParams } from 'react-router-dom'
 import { getPriceWIthDiscount } from '../../utils'
 import Spinner from '../../spinner/Spinner'
 import Reviews from '../../reviews/Reviews'
+import CartItemControl from '../../cart-item-control/CartItemControl'
 
 const ProductPage = () => {
 	const dispatch = useAppDispath()
 	const data: TProductResponseDto | null = useAppSelector(selectProduct)
 	const { id } = useParams()
-	// const loading = useAppSelector(selectProductLoading)
 
 	useEffect(() => {
 		dispatch(fetchProduct(id as string))
@@ -130,22 +127,7 @@ const ProductPage = () => {
 									&nbsp;₽
 								</span>
 							</div>
-							<div className='product__btn-wrap'>
-								<div className='button-count'>
-									<button className='button-count__minus' disabled={true}>
-										-
-									</button>
-									<input
-										type='number'
-										className='button-count__num'
-										value='0'
-									/>
-									<button className='button-count__plus'>+</button>
-								</div>
-								<a href='/cart' className='button button_type_primary'>
-									В корзину
-								</a>
-							</div>
+							<CartItemControl product={data} />
 							<button className='product__favorite product__favorite_active'>
 								<svg
 									width='24'
