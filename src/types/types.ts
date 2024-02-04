@@ -54,4 +54,5 @@ export type TReviewProps = {
 
 export type TRatingProps = {
 	rating?: number
+	onRate?: (index: number) => void
 }
