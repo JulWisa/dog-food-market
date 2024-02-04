@@ -4,9 +4,10 @@ import { CardPropsType } from '../types/types'
 import { Link, useLocation } from 'react-router-dom'
 import { getPriceWIthDiscount } from '../utils'
 import FavoriteButton from '../favorite-button/FavoriteButton'
+import CartItemControl from '../cart-item-control/CartItemControl'
 
-const Card = ({
-	data: {
+const Card = ({ data, user }: CardPropsType) => {
+	const {
 		discount = 0,
 		name,
 		price,
@@ -16,9 +17,7 @@ const Card = ({
 		_id,
 		tags,
 		likes,
-	},
-	user,
-}: CardPropsType) => {
+	} = data
 	const location = useLocation()
 
 	return (
@@ -60,11 +59,7 @@ const Card = ({
 					<h3 className='card__name'>{name}</h3>
 				</div>
 			</Link>
-			{available && (
-				<a href='/' className='card__cart card__btn card__btn_type_primary'>
-					В корзину
-				</a>
-			)}
+			{available && <CartItemControl product={data} />}
 		</article>
 	)
 }
