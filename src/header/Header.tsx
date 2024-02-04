@@ -40,7 +40,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 						</svg>
 						<span className='header__icon-bubble'>4</span>
 					</Link>
-					<a className='header__favorites-link' href='/cart'>
+					<Link className='header__favorites-link' to={PATH_NAME.CART}>
 						<svg
 							width='24'
 							height='24'
@@ -55,7 +55,7 @@ const Header = ({ data, onSearch }: HeaderPropTypes) => {
 								fill='#1A1A1A'
 							></path>
 						</svg>
-					</a>
+					</Link>
 					<Link className='header__icons-menu-item' to={PATH_NAME.USER}>
 						<img src={user?.avatar} alt={user?.name || 'user avatar'} className="user-avatar" />
 						{user?.name}

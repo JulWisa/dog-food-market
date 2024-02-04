@@ -14,6 +14,7 @@ import UserPage from './pages/user-page/UserPage'
 import FavoritesPage from './pages/favorites-page/FavoritesPage'
 import store from './services/store'
 import { Provider } from 'react-redux'
+import CartPage from './pages/cart-page/CartPage'
 
 const routes: RouteObject[] = [
 	{
@@ -24,6 +25,7 @@ const routes: RouteObject[] = [
 			{ path: PATH_NAME.PRODUCT, element: <ProductPage /> },
 			{ path: PATH_NAME.USER, element: <UserPage /> },
 			{ path: PATH_NAME.FAVORITES, element: <FavoritesPage /> },
+			{ path: PATH_NAME.CART, element: <CartPage /> },
 			{
 				path: PATH_NAME.NOT_FOUND,
 				element: <NotFoundPage />,

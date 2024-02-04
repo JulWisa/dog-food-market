@@ -6,5 +6,6 @@ export const PATH_NAME = {
 	USER: '/user/',
 	PROFILE_EDIT: '/user/edit',
 	FAVORITES: '/favorites/',
+	CART: '/cart/',
 	NOT_FOUND: '*',
 }
